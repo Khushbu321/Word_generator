@@ -1,0 +1,119 @@
+<html>
+<title>
+</title>
+<style type="text/css">
+.tb
+  {
+      border: 1px solid red;
+      height: 30px;
+      width: 30px;
+  }
+  table
+  {
+    margin: 15%;
+    box-shadow: 10px 10px 5px #888888;
+  }
+  button
+  {
+    box-shadow: 10px 10px 5px #888888;
+  }
+  #main
+  {
+    border: 1px solid black;
+    width: 30%;
+    height: 50%;
+    box-shadow: 10px 10px 5px #888888;
+  }
+</style>
+<body id="body">
+<center>
+<div id="main">
+<center>
+<h2>SCRABBLE</h2>
+<table border="1">
+<tr class="tb">
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+<td class="tb" onclick="handleClick(this)"></td>
+</tr>
+</table>
+</center>
+<input type="button" value="New Game" onclick="changeWord()">
+<input type="button" value="End Game" onclick="endGame()">
+</div>
+</center>
+</body>
+
+<script type="text/javascript">
+    var words = ["word","admire","moon","stars","sky","kind","particular","head","sleep","passion","success","honour","journey","happy","love","health","friends"];
+    var fword = [];
+    var word;
+    function changeWord(){
+  	  word = words[Math.floor(Math.random()* words.length)];
+     var index = { 
+                input: []
+                };
+                
+    while(true){
+      if(fword.length === word.length){
+        break;
+      }
+      else
+      {    
+           for(var i = 0; i< word.length;i++){
+           var no =Math.floor(Math.random() * word.length);
+           var newLetter = word.charAt(no); 
+           var array = Object.values(index);
+           if(!array[0].includes(no)){
+           index.input.push(no);
+           fword.push(newLetter);
+          }
+          else
+          {
+            continue;
+          }
+         }
+      }
+    }
+    var child = document.querySelector("tr").children;
+    for(var i =0; i< word.length;i++){
+      child[i].innerHTML = fword[i];
+    }
+ }
+ var i;
+ var counter = 0;
+  function handleClick(x){
+    for(i = counter ; i<word.length ;i++){
+       if(x.innerHTML == word[i])
+       {
+           x.bgColor = "green";
+           ++counter;
+           break;
+       }
+       else
+       {
+            x.bgColor = "red";
+            alert("Wrong Letter, Try Again");
+            break;
+       }
+     }
+     if(counter == word.length)
+     {
+        alert("Correct Word: "+word.toUpperCase());
+        document.location = document.location;
+     }
+    }
+
+     function endGame(){
+      document.location = document.location;
+     }
+</script>
+
+</html>
